@@ -42,7 +42,7 @@ services:
       - ./grafana-datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
 
   k6:
-    image: grafana/k6
+    image: grafana/k6:master-with-browser
     #    entrypoint: /bin/sh
     #    user: root
     networks:
@@ -56,7 +56,12 @@ services:
       - K6_PROMETHEUS_RW_TREND_AS_NATIVE_HISTOGRAM=true
       - K6_OUT=xk6-prometheus-rw
       - K6_PROMETHEUS_RW_INSECURE_SKIP_TLS_VERIFY=true
+      - K6_BROWSER_ENABLED=true
+      - K6_BROWSER_ARGS='no-sandbox'
       #- K6_PROMETHEUS_RW_STALE_MARKERS=true
+      #- K6_BROWSER_HEADLESS=false
+    command:
+      - --cap-add=SYS_ADMIN
     depends_on:
       - prometheus
     volumes:
