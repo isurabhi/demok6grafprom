@@ -1,6 +1,7 @@
 pool:
+  name: Default
   vmImage: 'ubuntu-18.04'
-
+  
 steps:
 - script: |
     docker run -it --rm -v ${PWD}:/src grafana/k6 run /src/scripts/test_times.js
