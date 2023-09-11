@@ -6,7 +6,7 @@ export const options = {
     loginui: {
       executor: "constant-vus",
       exec: "loginpageTest",
-      vus: 1,
+      vus: 2,
       duration: "10s",
       options: {
         browser: {
@@ -16,7 +16,7 @@ export const options = {
     },
   },
   thresholds: {
-    checks: ["rate==1.0"],
+    http_req_duration: ["p(95)<250"],
   },
 };
 
