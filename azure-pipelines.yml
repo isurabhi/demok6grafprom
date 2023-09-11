@@ -1,6 +1,7 @@
 # azure-pipelines.yml
 
 pool:
+  name: Default
   vmImage: 'ubuntu-latest'
 
 steps:
