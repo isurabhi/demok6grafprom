@@ -4,7 +4,7 @@ pool:
   
 steps:
 - script: |
-    docker run -it --rm -v ${PWD}:/src grafana/k6 run /src/scripts/test_times.js
+    docker run -i -v ${PWD}:/src grafana/k6 run /src/scripts/test_times.js
   displayName: Run k6 from Docker locally
 # docker run -i -v `pwd`:/src grafana/k6 run /src/scripts/test_times.js
 #- script: |
