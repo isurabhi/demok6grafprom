@@ -5,7 +5,7 @@ export const options = {
   scenarios: {
     loginui: {
       executor: "constant-vus",
-      exec: "loginpageTest",
+      exec: "browserTest",
       vus: 2,
       duration: "10s",
       options: {
@@ -16,7 +16,7 @@ export const options = {
     },
   },
   thresholds: {
-    http_req_duration: ["p(95)<250"],
+    checks: ["rate==1.0"],
   },
 };
 
@@ -27,19 +27,10 @@ export const testconfig = {
   passcode: "",
 };
 
-export async function loginpageTest() {
-  const browser = chromium.launch({
-    args: ["no-sandbox"],
-    headless: true,
-    timeout: "60s", // Or whatever time you want to define
-  });
-
+export async function browserTest() {
   const page = browser.newPage();
-
   try {
     await page.goto(testconfig.loginurl);
-    page.screenshot({ path: "/prometheus/screenshot.png" });
-    /*
     page.locator('input[name="Email"]').type(testconfig.username);
     page.locator('input[name="Password"]').type(testconfig.password);
     const submitButton = page.locator('input[id="trusaic-loginBtn"]');
@@ -49,7 +40,6 @@ export async function loginpageTest() {
         p.locator('p[class="enter-code-title"]').textContent() ==
         "Enter the code sent to",
     });
-    */
   } finally {
     page.close();
   }
