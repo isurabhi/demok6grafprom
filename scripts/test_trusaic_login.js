@@ -69,11 +69,11 @@ export async function kTestLogin() {
   try {
     await page.goto("https://test.k6.io/my_messages.php");
     sleep(30);
-    page.screenshot({ path: "/prometheus/01_homepage.png" });
+    //page.screenshot({ path: "/prometheus/01_homepage.png" });
     // Enter login credentials
     page.waitForSelector('input[name="login"]').type("admin");
     page.waitForSelector('input[name="password"]').type("123");
-    page.screenshot({ path: "/prometheus/01_homepage2.png" });
+    //page.screenshot({ path: "/prometheus/01_homepage2.png" });
   } finally {
     page.close();
   }

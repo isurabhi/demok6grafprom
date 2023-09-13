@@ -60,7 +60,7 @@ services:
       #- K6_PROMETHEUS_RW_STALE_MARKERS=true
       #- K6_BROWSER_ENABLED=true
       #----------------------------- browser testing ----------------------
-      - K6_BROWSER_HEADLESS=true
+      #- K6_BROWSER_HEADLESS=true
       #---------------------------------------------------------------------
     command:
       - --cap-add=SYS_ADMIN

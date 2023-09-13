@@ -4,5 +4,4 @@ Write-Output "Load testing with Grafana dashboard http://localhost:3000/d/01npcT
 Write-Output "--------------------------------------------------------------------------------------"
 #docker-compose run --rm k6 run -o experimental-prometheus-rw /scripts/test_times.js 
 docker-compose run --rm k6 run -o experimental-prometheus-rw /scripts/test_trusaic_login.js 
-
 #docker compose down
