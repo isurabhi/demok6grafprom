@@ -51,21 +51,23 @@ services:
     ports:
       - "6565:6565"
     environment:
+      #----------------------------- prometheus config ---------------------
       - K6_PROMETHEUS_RW_PUSH_INTERVAL=5s
       - K6_PROMETHEUS_RW_SERVER_URL=http://prometheus:9090/api/v1/write
       - K6_PROMETHEUS_RW_TREND_AS_NATIVE_HISTOGRAM=true
       - K6_OUT=xk6-prometheus-rw
       - K6_PROMETHEUS_RW_INSECURE_SKIP_TLS_VERIFY=true
-      - K6_BROWSER_ENABLED=true
-      - K6_BROWSER_ARGS='no-sandbox'
       #- K6_PROMETHEUS_RW_STALE_MARKERS=true
-      #- K6_BROWSER_HEADLESS=false
+      #- K6_BROWSER_ENABLED=true
+      #----------------------------- browser testing ----------------------
+      - K6_BROWSER_HEADLESS=true
+      #---------------------------------------------------------------------
     command:
       - --cap-add=SYS_ADMIN
     depends_on:
       - prometheus
     volumes:
       - ./scripts:/scripts
-
+      - ./prometheus-data:/prometheus
 volumes:
   grafana_storage: {}
