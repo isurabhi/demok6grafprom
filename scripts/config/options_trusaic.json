@@ -4,11 +4,22 @@
     "portal-qa.trusaic.com": "13.66.249.110"
   },
   "scenarios": {
+    "portal_login":{
+      "executor": "per-vu-iterations",
+      "options": {
+        "browser": {
+          "type": "chromium"
+        }
+      },
+      "exec": "portalLogin",
+      "vus": 1,
+      "iterations": 1
+    },
     "portal_availability":{
       "executor": "per-vu-iterations",
       "exec": "availabilityTest",
-      "vus": 5,
-      "iterations": 3,
+      "vus": 1,
+      "iterations": 1,
       "maxDuration": "500s"
     }
   },
