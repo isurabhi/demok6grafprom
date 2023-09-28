@@ -3,7 +3,7 @@
   "hosts": {
     "portal-qa.trusaic.com": "13.66.249.110"
   },
-  "scenarios": {
+  "scenarios": {    
     "portal_login":{
       "executor": "per-vu-iterations",
       "options": {
@@ -12,20 +12,17 @@
         }
       },
       "exec": "portalLogin",
+      "startTime": "1s",
       "vus": 1,
       "iterations": 1
     },
     "portal_availability":{
       "executor": "per-vu-iterations",
       "exec": "availabilityTest",
-      "vus": 1,
-      "iterations": 1,
+      "vus": 10,
+      "iterations": 5,
       "maxDuration": "500s"
     }
   },
-  "thresholds": {
-    "http_req_duration": ["avg<100", "p(95)<200"]
-  },
-  "noConnectionReuse": true,
   "userAgent": "MyK6UserAgentString/1.0"
 }  

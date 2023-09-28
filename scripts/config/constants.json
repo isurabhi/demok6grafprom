@@ -1,0 +1,14 @@
+{
+    "isScreenshotEnabled": true,
+    "screenshotPath":"/prometheus/trusaic_",
+    "screenshotExtn":".png",
+    "domain": "trusaic.testinator.com",
+    "inbox": "qa",
+    "apiToken": "12b00439466e45ee855b3f3c64e4c612",
+    "mailUrl": "https://mailinator.com/api/v2/domains/",
+    "portalUrl": "https://portal-qa.trusaic.com",
+    "portalUser": "qa@Trusaic.testinator.com",
+    "portalPass": "Trusaic@12",
+    "defaultNavigationTimeout": 2000,
+    "defaultTimeout": 45000
+}
