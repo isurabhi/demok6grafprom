@@ -8,5 +8,5 @@ steps:
   - task: k6-load-test@0
     inputs:
       cloud: true
-      filename: './scripts/start_trusaic_load.js'
+      filename: './scripts/trusaic_cloud_test.js'
       args: '--experimental-prometheus-rw'
