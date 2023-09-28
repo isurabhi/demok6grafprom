@@ -7,8 +7,8 @@ scrape_configs:
     static_configs:
       - targets:
           - 'prometheus:9090'
-remote_write:
-- url: https://prometheus-prod-13-prod-us-east-0.grafana.net/api/prom/push
-  basic_auth:
-    username: 1212056
-    password: 'glc_eyJvIjoiOTU1MzE1IiwibiI6InN0YWNrLTc1MjA3NC1obS1yZWFkLXFhdHJ1c2FpY2s2YXp1cmVjaWNkIiwiayI6IjBwOXZ2OTFhWTZESDdUNGdzRjhpM2QxZyIsIm0iOnsiciI6InByb2QtdXMtZWFzdC0wIn19
+#remote_write:
+#- url: https://prometheus-prod-13-prod-us-east-0.grafana.net/api/prom/push
+#  basic_auth:
+#    username: 1212056
+#    password: 'glc_eyJvIjoiOTU1MzE1IiwibiI6InN0YWNrLTc1MjA3NC1obS1yZWFkLXFhdHJ1c2FpY2s2YXp1cmVjaWNkIiwiayI6IjBwOXZ2OTFhWTZESDdUNGdzRjhpM2QxZyIsIm0iOnsiciI6InByb2QtdXMtZWFzdC0wIn19
