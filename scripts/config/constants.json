@@ -1,5 +1,5 @@
 {
-    "isScreenshotEnabled": true,
+    "isScreenshotEnabled": false,
     "screenshotPath":"/prometheus/trusaic_",
     "screenshotExtn":".png",
     "domain": "trusaic.testinator.com",
