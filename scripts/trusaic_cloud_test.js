@@ -4,10 +4,6 @@ import http from "k6/http";
 export const options = {
   ext: {
     loadimpact: {
-      distribution: {
-        "amazon:us:ashburn": { loadZone: "amazon:us:ashburn", percent: 50 },
-        "amazon:gb:london": { loadZone: "amazon:gb:london", percent: 50 },
-      },
       apm: [
         {
           provider: "prometheus",
