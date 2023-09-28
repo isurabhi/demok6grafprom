@@ -9,4 +9,3 @@ steps:
     inputs:
       cloud: true
       filename: './scripts/start_trusaic_load.js'
-      args: '-o experimental-prometheus-rw'
