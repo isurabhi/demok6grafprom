@@ -5,6 +5,11 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-  - task: k6-load-test@0
-    inputs:
-      filename: './scripts/start_trusaic_load.js'
+- script: |
+    k6 login cloud --token $(K6.CLOUD.TOKEN)
+    k6 cloud --quiet scripts/start_trusaic_load.js
+  displayName: Run k6 cloud load test within Azure Pipelines
+- task: k6-load-test@0
+  inputs:
+    cloud: true
+    filename: './scripts/start_trusaic_load.js'
