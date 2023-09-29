@@ -23,16 +23,15 @@
       "iterations": 3,
       "maxDuration": "500s"
     }
-  },
-  "userAgent": "MyK6UserAgentString/1.0",
+  },  
   "ext": {
     "loadimpact": {
       "apm": [
         {
           "provider": "prometheus",
           "remoteWriteURL" : "https://prometheus-prod-13-prod-us-east-0.grafana.net/api/prom/push",
-          "credentials": {
-            "token": "glc_eyJvIjoiOTU1MzE1IiwibiI6InN0YWNrLTc1MjA3NC1obS1yZWFkLXFhdHJ1c2FpY2s2YXp1cmVjaWNkIiwiayI6IjBwOXZ2OTFhWTZESDdUNGdzRjhpM2QxZyIsIm0iOnsiciI6InByb2QtdXMtZWFzdC0wIn19",
+          "credentials":{
+            "token": "glc_eyJvIjoiOTU1MzE1IiwibiI6InN0YWNrLTc1MjA3NC1obS1yZWFkLXFhdHJ1c2FpY2s2YXp1cmVjaWNkIiwiayI6IjBwOXZ2OTFhWTZESDdUNGdzRjhpM2QxZyIsIm0iOnsiciI6InByb2QtdXMtZWFzdC0wIn19"
           },
           "includeDefaultMetrics": true,
           "includeTestRunId": false,
@@ -40,5 +39,6 @@
         }
       ]
     }
-  }
-}  
+  },
+  "userAgent": "MyK6UserAgentString/1.0"
+}
