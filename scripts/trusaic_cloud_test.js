@@ -1,5 +1,8 @@
-import { sleep } from "k6";
+import { check, sleep } from "k6";
 import http from "k6/http";
+import { appConstants } from "./general/constants.js";
+
+const CONSTS = appConstants;
 
 export const options = {
   ext: {
@@ -22,24 +25,47 @@ export const options = {
   },
   thresholds: {},
   scenarios: {
-    Scenario_1: {
+    portal_availability: {
       executor: "ramping-vus",
       gracefulStop: "30s",
       stages: [
-        { target: 20, duration: "1m" },
-        { target: 20, duration: "3m30s" },
-        { target: 0, duration: "1m" },
+        { target: 5, duration: "20s" },
+        { target: 10, duration: "30s" },
+        { target: 0, duration: "10m" },
       ],
       gracefulRampDown: "30s",
-      exec: "scenario_1",
+      exec: "availabilityTest",
+    },
+    portal_apitest: {
+      executor: "ramping-vus",
+      gracefulStop: "30s",
+      stages: [
+        { target: 2, duration: "5s" },
+        { target: 5, duration: "10s" },
+        { target: 0, duration: "3m" },
+      ],
+      gracefulRampDown: "30s",
+      exec: "apiCallTest",
     },
   },
 };
 
-export function scenario_1() {
-  let response;
-  // Get homepage
-  response = http.get("https://test.k6.io/");
-  // Automatically added sleep
+export function availabilityTest() {
+  const res = http.get(CONSTS.portalUrl, {
+    tags: { my_custom_tag: "portal_availability" },
+  });
+  check(res, {
+    "status is 200": (r) => r.status == 200,
+  });
+  sleep(1);
+}
+
+export function apiCallTest() {
+  const payload = JSON.stringify({
+    name: "lorem",
+    surname: "ipsum",
+  });
+  const headers = { "Content-Type": "application/json" };
+  http.post("https://httpbin.test.k6.io/post", payload, { headers });
   sleep(1);
 }
