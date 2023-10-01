@@ -10,5 +10,6 @@
     "portalUser": "qa@Trusaic.testinator.com",
     "portalPass": "Trusaic@12",
     "defaultNavigationTimeout": 2000,
-    "defaultTimeout": 45000
+    "defaultTimeout": 45000,
+    "memJson": "application/json"
 }

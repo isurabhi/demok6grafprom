@@ -1,9 +1,17 @@
 import { check, sleep } from "k6";
 import http from "k6/http";
 import { browser } from "k6/experimental/browser";
-import { appConstants } from "./general/constants.js";
-import { getMfaCode } from "./general/getMfaCode.js";
 
+export const appConstants = {
+  domain: "trusaic.testinator.com",
+  inbox: "qa",
+  apiToken: "12b00439466e45ee855b3f3c64e4c612",
+  mailUrl: "https://mailinator.com/api/v2/domains/",
+  portalUrl: "https://portal-qa.trusaic.com",
+  portalUser: "qa@Trusaic.testinator.com",
+  portalPass: "Trusaic@12",
+  memJson: "application/json",
+};
 const CONSTS = appConstants;
 
 export const options = {
@@ -75,12 +83,25 @@ export function availabilityTest() {
 }
 
 export function apiCallTest() {
-  const payload = JSON.stringify({
-    name: "lorem",
-    surname: "ipsum",
+  const res2 = http.get(
+    `${CONSTS.portalUrl}/css/login.css?v=638273698668208760`,
+    {
+      headers: { Accepts: CONSTS.memJson },
+    }
+  );
+  check(res2, { "status is 200": (r) => r.status === 200 });
+  sleep(1);
+
+  const res3 = http.get(
+    `${CONSTS.portalUrl}/css/global.css?v=638273698668208940`,
+    {
+      headers: { Accepts: CONSTS.memJson },
+    }
+  );
+  check(res3, {
+    "status is 200": (r) => r.status === 200,
+    "response time is less than 200ms": (r) => r.timings.duration < 200,
   });
-  const headers = { "Content-Type": "application/json" };
-  http.post("https://httpbin.test.k6.io/post", payload, { headers });
   sleep(1);
 }
 
@@ -119,4 +140,32 @@ export async function portalLogin() {
   } finally {
     page.close();
   }
+}
+
+export function getMfaCode(domain, inbox, mailUrl, apiToken) {
+  // reading the mailbox and picking the first email.
+  const resInbox = http.get(
+    `${mailUrl}${domain}/inboxes/${inbox}/?limit=1&sort=descending&token=${apiToken}`
+  );
+  //console.log(inboxUrl);
+  //console.log(resInbox.json("msgs"));
+  const messageId = resInbox.json("msgs.0.id");
+  console.log(messageId);
+  //----------------------------------------------------------------------
+
+  // reading the message and scan body for CODE
+  const resMessage = http.get(
+    `${mailUrl}${domain}/inboxes/${inbox}/messages/${messageId}/?token=${apiToken}`
+  );
+  const mail = resMessage.json("parts.0.body");
+  // search message text
+  const codeRegex =
+    /Security code: <span class=\"security-code-span\" style=\"font-weight: 700; font-size: 105%;\">(\d+)/;
+  const match = codeRegex.exec(mail);
+  if (match) {
+    return match[1];
+  } else {
+    throw new Error("Could not find 2FA code in email message");
+  }
+  //------------------------------------------------------------------------
 }
