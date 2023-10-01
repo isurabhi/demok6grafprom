@@ -5,7 +5,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-  task: k6-load-test@0
+  - task: k6-load-test@0
   inputs:
     cloud: true
     filename: './scripts/trusaic_cloud_test.js'
