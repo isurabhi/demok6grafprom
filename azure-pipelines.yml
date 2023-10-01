@@ -9,7 +9,6 @@ steps:
   inputs:
     cloud: true
     filename: './scripts/trusaic_cloud_test.js'
-    args: '--experimental-prometheus-rw'
     inputs:
       cloud: true
       filename: './scripts/trusaic_cloud_test.js'
