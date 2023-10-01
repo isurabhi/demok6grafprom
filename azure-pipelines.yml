@@ -6,9 +6,6 @@ pool:
 
 steps:
   - task: k6-load-test@0
-  inputs:
-    cloud: true
-    filename: './scripts/trusaic_cloud_test.js'
     inputs:
       cloud: true
       filename: './scripts/trusaic_cloud_test.js'
