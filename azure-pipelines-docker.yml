@@ -15,6 +15,5 @@ steps:
     script: |
       docker pull grafana/k6:master-with-browser
 - script: |
-    docker run --rm -i -v $(pwd)/scripts:/scripts grafana/k6:master-with-browser run - <trusaic_cloud_test.js
-  displayName: Run k6 from Docker in azure pipeline 
-
+    cat .\scripts\trusaic_cloud_test.js | docker run --rm -i -v $(pwd)/scripts:/scripts grafana/k6:master-with-browser run -
+  displayName: Run k6 from Docker in azure pipeline
