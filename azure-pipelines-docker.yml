@@ -15,13 +15,7 @@ steps:
     script: |
       docker pull grafana/k6:master-with-browser
 - script: |
-    cat .\scripts\trusaic_cloud_test.js | `
-    docker run --rm -i --cap-add=SYS_ADMIN `
-    -e K6_OUT=xk6-prometheus-rw `
-    -e K6_PROMETHEUS_RW_INSECURE_SKIP_TLS_VERIFY=true `
-    -e K6_PROMETHEUS_RW_PUSH_INTERVAL=5s `
-    -e K6_PROMETHEUS_RW_SERVER_URL=https://prometheus-prod-13-prod-us-east-0.grafana.net/api/prom/push `
-    -e K6_PROMETHEUS_RW_USERNAME=1212056 `
-    -e K6_PROMETHEUS_RW_PASSWORD=glc_eyJvIjoiOTU1MzE1IiwibiI6InBkYy1xYXRydXNhaWMtZGVmYXVsdC1xYXRydXNhaWNrNi13cmlldCIsImsiOiJkejc2SDdJM2dFOVkzMDVKWE5uMWI4ZEciLCJtIjp7InIiOiJwcm9kLXVzLWVhc3QtMCJ9fQ== `
-    grafana/k6 run -o experimental-prometheus-rw -
-  displayName: Run k6 from Docker in azure pipeline
+    k6 login cloud --token $(k6_cloud_token)
+    k6 cloud --quiet scripts/trusaic_cloud_test.js
+  displayName: Run k6 cloud load test within Azure Pipelines      
+
