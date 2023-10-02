@@ -15,7 +15,8 @@ export const appConstants = {
 const CONSTS = appConstants;
 
 export const options = {
-  ext: {
+  //httpDebug: "full",
+  /*ext: {
     loadimpact: {
       apm: [
         {
@@ -32,8 +33,7 @@ export const options = {
         },
       ],
     },
-  },
-  thresholds: {},
+  },*/
   scenarios: {
     portal_availability: {
       executor: "ramping-vus",
@@ -70,6 +70,8 @@ export const options = {
       iterations: 1,
     },
   },
+  noConnectionReuse: true,
+  userAgent: "MyK6UserAgentString/1.0",
 };
 
 export function availabilityTest() {
