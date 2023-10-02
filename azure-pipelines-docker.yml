@@ -6,7 +6,7 @@ steps:
   displayName: Login to registry
   inputs: 
     command: login
-    containerRegistry: $(docker_registry) # variable with Service Connection name
+    containerRegistry: $(registry) # variable with Service Connection name
 - task: Bash@3
   displayName: Pulling docker image
   inputs:
