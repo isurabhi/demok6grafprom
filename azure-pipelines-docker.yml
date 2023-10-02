@@ -3,10 +3,13 @@ pool:
   
 steps:
 - script: |
-    cat .\scripts\start_trusaic_load.js | docker run --rm -i --cap-add=SYS_ADMIN grafana/k6:master-with-browser run -
-  displayName: Run k6 from Docker locally
-# docker run -i -v `pwd`:/src grafana/k6 run /src/scripts/test_times.js
-# docker run -i -v "%cd%":/src loadimpact/k6 run /src/scripts/test_times.js
-#- script: |
-#    docker run -i -v `pwd`:/src -e K6_CLOUD_TOKEN=$(k6cloud.token) grafana/k6 cloud /src/loadtests/cloud.js
-#  displayName: Run k6 from Docker offloading to cloud
+    cat .\scripts\trusaic_cloud_test.js | `
+    docker run --rm -i --cap-add=SYS_ADMIN `
+    -e K6_OUT=xk6-prometheus-rw `
+    -e K6_PROMETHEUS_RW_INSECURE_SKIP_TLS_VERIFY=true `
+    -e K6_PROMETHEUS_RW_PUSH_INTERVAL=5s `
+    -e K6_PROMETHEUS_RW_SERVER_URL=https://prometheus-prod-13-prod-us-east-0.grafana.net/api/prom/push `
+    -e K6_PROMETHEUS_RW_USERNAME=1212056 `
+    -e K6_PROMETHEUS_RW_PASSWORD=glc_eyJvIjoiOTU1MzE1IiwibiI6InBkYy1xYXRydXNhaWMtZGVmYXVsdC1xYXRydXNhaWNrNi13cmlldCIsImsiOiJkejc2SDdJM2dFOVkzMDVKWE5uMWI4ZEciLCJtIjp7InIiOiJwcm9kLXVzLWVhc3QtMCJ9fQ== `
+    grafana/k6:master-with-browser run -o experimental-prometheus-rw -
+  displayName: Run k6 from Docker in azure pipeline
