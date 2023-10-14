@@ -14,6 +14,12 @@ steps:
     # docker_registry_name - name of the private repository
     script: |
       docker pull grafana/k6:master-with-browser
+
+- script: |
+    sudo service docker stop
+    sudo rm -rf /var/lib/docker
+    sudo service docker start  
+
 - script: |
     docker run --rm -i -v /home/vsts/work/1/s/scripts:/scripts \
       -e K6_CLOUD_PROJECT_ID=$(K6_CLOUD_PROJECT_ID) \
