@@ -14,7 +14,7 @@ steps:
     # docker_registry_name - name of the private repository
     script: |
       docker pull grafana/k6:master-with-browser
-      docker tag grafana/k6:master-with-browser browser/K6
+      docker tag grafana/k6:master-with-browser azure/k6b
 
 - script: |
     docker run --rm -i -v /home/vsts/work/1/s/scripts:/scripts \
@@ -27,5 +27,5 @@ steps:
       -e K6_PROMETHEUS_RW_TREND_AS_NATIVE_HISTOGRAM=true \
       -e K6_PROMETHEUS_RW_USERNAME=1212056 \
       -e K6_PROMETHEUS_RW_PASSWORD=$(K6_PROMETHEUS_RW_PASSWORD) \
-      browser/K6 run -o cloud -o experimental-prometheus-rw - <scripts/trusaic_cloud_test.js
+      azure/k6b run -o cloud -o experimental-prometheus-rw - <scripts/trusaic_cloud_test.js
   displayName: Run k6 from Docker in azure pipeline
