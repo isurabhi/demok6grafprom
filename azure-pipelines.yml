@@ -9,4 +9,4 @@ steps:
     inputs:
       cloud: true
       filename: './scripts/test_times.js'
-      args: --out experimental-prometheus-rw
+      args: -o experimental-prometheus-rw
