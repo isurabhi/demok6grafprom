@@ -7,6 +7,6 @@ pool:
 steps:
   - task: k6-load-test@0
     inputs:
-      cloud: true
-      filename: './scripts/test_times.js'
+      cloud: true      
       args: -o experimental-prometheus-rw
+      filename: './scripts/test_times.js'
